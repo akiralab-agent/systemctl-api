@@ -19,12 +19,11 @@ ALLOWED_ACTIONS = {
 SERVICE_NAME_RE = re.compile(r"^[A-Za-z0-9_.@:-]+(?:\.service)?$")
 
 
-def list_running_services() -> list[ServiceUnit]:
+def list_services() -> list[ServiceUnit]:
     result = _run_systemctl(
         [
             "list-units",
             "--type=service",
-            "--state=running",
             "--no-pager",
             "--no-legend",
             "--plain",
@@ -55,6 +54,10 @@ def list_running_services() -> list[ServiceUnit]:
         )
 
     return services
+
+
+def list_running_services() -> list[ServiceUnit]:
+    return list_services()
 
 
 def run_service_action(action: str, service: str) -> subprocess.CompletedProcess[str]:
