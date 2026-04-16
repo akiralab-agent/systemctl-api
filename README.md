@@ -1,6 +1,6 @@
 # Systemctl API
 
-API em FastAPI para listar services em execução no systemd e executar comandos
+API em FastAPI para listar services conhecidos pelo systemd e executar comandos
 controlados em um service via `systemctl`.
 
 ## Requisitos
@@ -71,12 +71,12 @@ Authorization: sua-chave-secreta
 curl http://localhost:8000/health
 ```
 
-### Listar services em execução
+### Listar services
 
 Equivalente a:
 
 ```bash
-systemctl list-units --type=service --state=running --no-pager
+systemctl list-units --type=service --all --no-pager
 ```
 
 Request:
