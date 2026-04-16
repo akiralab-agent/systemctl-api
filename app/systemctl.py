@@ -26,6 +26,7 @@ def list_running_services() -> list[ServiceUnit]:
             "--type=service",
             "--state=running",
             "--no-pager",
+            "--no-legend",
             "--plain",
             "--all",
         ]
