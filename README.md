@@ -30,6 +30,31 @@ SECRET_KEY=sua-chave-secreta
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
+## Instalar como serviço no Ubuntu
+
+O script abaixo cria o virtualenv, instala as dependências, cria `.env` se ele
+não existir, registra o serviço no systemd e sobe a API na porta `51000`.
+
+```bash
+sudo ./scripts/install-systemd-service.sh
+```
+
+Por padrão, o serviço será criado com o nome `systemctl-api` e rodará como
+`root`, porque a API executa comandos `systemctl`. Para sobrescrever:
+
+```bash
+sudo SERVICE_NAME=systemctl-api PORT=51000 SERVICE_USER=root \
+  ./scripts/install-systemd-service.sh
+```
+
+Comandos úteis:
+
+```bash
+systemctl status systemctl-api
+journalctl -u systemctl-api -f
+systemctl restart systemctl-api
+```
+
 ## Autenticação
 
 Envie a chave no header `Authorization`:
