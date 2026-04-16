@@ -6,7 +6,7 @@ from app.schemas import (
     ServiceCommandResponse,
     ServiceListResponse,
 )
-from app.systemctl import list_running_services, run_service_action
+from app.systemctl import list_services, run_service_action
 
 
 app = FastAPI(
@@ -27,7 +27,7 @@ def health() -> dict[str, str]:
     dependencies=[Depends(verify_authorization)],
 )
 def get_services() -> ServiceListResponse:
-    return ServiceListResponse(services=list_running_services())
+    return ServiceListResponse(services=list_services())
 
 
 @app.post(
